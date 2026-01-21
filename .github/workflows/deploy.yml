@@ -101,4 +101,4 @@ jobs:
       - name: Deployment placeholder
         run: |
           echo "Deployment stage - will configure server deployment next"
-          echo "Build artifacts are ready for deployment"
+          echo "Build artifacts are ready for deployment"g
