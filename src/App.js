@@ -10,6 +10,7 @@ function App() {
 
   useEffect(() => {
     // Simulated sales data
+    //..
     setSalesData([
       { month: 'Jan', sales: 4000, revenue: 2400 },
       { month: 'Feb', sales: 3000, revenue: 1398 },
