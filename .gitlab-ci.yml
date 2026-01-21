@@ -1,0 +1,74 @@
+image: node:18
+
+stages:
+  - test
+  - build
+  - deploy
+
+variables:
+  NODE_ENV: production
+
+# Cache node modules for faster builds
+cache:
+  paths:
+    - node_modules/
+
+# Test Stage
+test:
+  stage: test
+  script:
+    - echo "Installing dependencies..."
+    - npm ci
+    - echo "Running tests..."
+    - npm test -- --coverage --watchAll=false
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+    paths:
+      - coverage/
+    expire_in: 1 week
+  only:
+    - main
+    - develop
+    - merge_requests
+
+# Build Stage
+build:
+  stage: build
+  script:
+    - echo "Installing dependencies..."
+    - npm ci
+    - echo "Building application..."
+    - export REACT_APP_VERSION=$(node -p "require('./package.json').version")
+    - export REACT_APP_BUILD_DATE=$(date +%Y-%m-%d)
+    - npm run build
+    - echo "Build completed successfully!"
+    - ls -la build/
+  artifacts:
+    name: "build-$CI_COMMIT_SHORT_SHA"
+    paths:
+      - build/
+    expire_in: 30 days
+  only:
+    - main
+    - tags
+
+# Deploy Stage (manual for now, will automate later)
+deploy:
+  stage: deploy
+  script:
+    - echo "Deployment stage - preparing for deployment"
+    - echo "Version:" $(node -p "require('./package.json').version")
+    - echo "Build artifacts ready for deployment"
+    - ls -la build/
+  dependencies:
+    - build
+  only:
+    - main
+    - tags
+  when: manual  # Manual trigger for now, we'll automate this later
+  environment:
+    name: production
+    url: http://your-server-url.com
