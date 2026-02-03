@@ -24,7 +24,8 @@ pipeline {
         stage('Get Version') {
             steps {
                 script {
-                    def packageJson = readJSON file: 'package.json'
+                    def packageContent = readFile('package.json')
+                    def packageJson = new groovy.json.JsonSlurper().parseText(packageContent)
                     env.APP_VERSION = packageJson.version
                     echo "Building version: ${env.APP_VERSION}"
                 }
