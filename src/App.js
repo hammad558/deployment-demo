@@ -4,7 +4,7 @@ import { TrendingUp, Users, DollarSign, ShoppingCart, Activity } from 'lucide-re
 import './App.css';
 
 function App() {
-  const version = process.env.REACT_APP_VERSION || '2.0.0';
+  const version = process.env.REACT_APP_VERSION || '1.0.0';
   const [salesData, setSalesData] = useState([]);
   const [userData, setUserData] = useState([]);
 
