@@ -4,7 +4,7 @@ import { TrendingUp, Users, DollarSign, ShoppingCart, Activity } from 'lucide-re
 import './App.css';
 
 function App() {
-  const version = process.env.REACT_APP_VERSION || '1.0.0';
+  const version = process.env.REACT_APP_VERSION || '2.0.0';
   const [salesData, setSalesData] = useState([]);
   const [userData, setUserData] = useState([]);
 
@@ -32,7 +32,7 @@ function App() {
   const stats = [
     { title: 'Total Revenue', value: '$45,231', icon: DollarSign, color: '#0088FE' },
     { title: 'Total Users', value: '1,234', icon: Users, color: '#00C49F' },
-    { title: 'Total Orders', value: '567', icon: ShoppingCart, color: '#FFBB28' },
+    { title: 'Total Orders', value: '679', icon: ShoppingCart, color: '#FFBB28' },
     { title: 'Growth Rate', value: '+23%', icon: TrendingUp, color: '#FF8042' },
   ];
 
