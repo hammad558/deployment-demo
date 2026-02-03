@@ -4,6 +4,8 @@ pipeline {
     tools {
         nodejs 'NodeJS-18'
     }
+//..    
+    
     
     environment {
         DEPLOY_DIR = '/var/www/deployment-demo'
